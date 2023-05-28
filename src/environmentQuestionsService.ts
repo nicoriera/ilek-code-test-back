@@ -7,11 +7,13 @@ export class EnvironmentQuestionsService {
 
   #getFiveQuestions(): any {
     return this.questions.slice(0, 4).map((question) => {
-      question.answers.forEach((answer) => {
+      const randomQuestion = JSON.parse(JSON.stringify(question));
+
+      randomQuestion.answers.forEach((answer) => {
         delete answer.isCorrect;
       });
 
-      return question;
+      return randomQuestion;
     });
   }
 
