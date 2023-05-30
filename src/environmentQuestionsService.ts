@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as environmentQuestions from './data/questions_environment.json';
+import * as mitigationQuestions from './data/questions_mitigation.json';
 import { shuffle } from 'lodash';
 
 @Injectable()
@@ -22,4 +23,9 @@ export class EnvironmentQuestionsService {
   getQuestions(): any {
     return this.#getFiveQuestions();
   }
+}
+
+@Injectable()
+export class MitigationQuestionsService extends EnvironmentQuestionsService {
+  questions = mitigationQuestions;
 }
