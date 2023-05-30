@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import * as environmentQuestions from './data/questions_environment.json';
+import { shuffle } from 'lodash';
 
 @Injectable()
 export class EnvironmentQuestionsService {
   questions = environmentQuestions;
 
   #getFiveQuestions(): any {
-    return this.questions.slice(0, 5).map((question) => {
+    const shuffledQuestions = shuffle(this.questions);
+    return shuffledQuestions.slice(0, 5).map((question) => {
       const randomQuestion = JSON.parse(JSON.stringify(question));
 
       randomQuestion.answers.forEach((answer) => {
