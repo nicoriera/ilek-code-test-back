@@ -26,17 +26,22 @@ export class EnvironmentQuestionsService {
     let score = 0;
 
     this.questions.forEach((question) => {
-      const submittedAnswer = submittedAnswers[question.id];
+      const questionId = `question-${question.id}`;
+      const submittedAnswer = submittedAnswers[questionId];
       const correctAnswer = question.answers.find((answer) => answer.isCorrect);
 
+      console.log(`Question ID: ${question.id}`);
+      console.log(`Submitted Answer: ${submittedAnswer}`);
+      console.log(
+        `Correct Answer: ${correctAnswer ? correctAnswer.answer : 'undefined'}`,
+      );
+
       if (correctAnswer && submittedAnswer === correctAnswer.answer) {
-        console.log(
-          `Correct answer for question ${question.id}:`,
-          correctAnswer,
-        );
         score++;
       }
+      console.log(`Score: ${score}`);
     });
+
     return score;
   }
 
@@ -53,16 +58,19 @@ export class MitigationQuestionsService extends EnvironmentQuestionsService {
     let score = 0;
 
     this.questions.forEach((question) => {
-      const submittedAnswer = submittedAnswers[question.id];
+      const submittedAnswer = submittedAnswers[`question-${question.id}`];
       const correctAnswer = question.answers.find((answer) => answer.isCorrect);
 
+      console.log(`Question ID: ${question.id}`);
+      console.log(`Submitted Answer: ${submittedAnswer}`);
+      console.log(
+        `Correct Answer: ${correctAnswer ? correctAnswer.answer : 'N/A'}`,
+      );
+
       if (correctAnswer && submittedAnswer === correctAnswer.answer) {
-        console.log(
-          `Correct answer for question ${question.id}:`,
-          correctAnswer,
-        );
         score++;
       }
+      console.log(`Score: ${score}`);
     });
     return score;
   }
