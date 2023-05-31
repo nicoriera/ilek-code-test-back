@@ -24,9 +24,20 @@ export class AppController {
   }
 
   @Post('mitigation_answers')
-  checkMitigationAnswers(@Body() submittedAnswers: SubmittedAnswers): any {
+  checkMitigationAnswers(
+    @Body() submittedAnswers: Record<string, string>,
+  ): any {
+    console.log(submittedAnswers);
     const score =
       this.mitigationQuestionsService.checkAnswers(submittedAnswers);
+    return { score };
+  }
+
+  @Post('environment_answers')
+  checkEnvironmentAnswers(@Body() submittedAnswers: SubmittedAnswers): any {
+    console.log(submittedAnswers);
+    const score =
+      this.environmentQuestionsService.checkAnswers(submittedAnswers);
     return { score };
   }
 }
