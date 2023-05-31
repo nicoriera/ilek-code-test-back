@@ -1,8 +1,10 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import {
   EnvironmentQuestionsService,
   MitigationQuestionsService,
 } from './environmentQuestionsService';
+
+type SubmittedAnswers = Record<string, string>;
 
 @Controller()
 export class AppController {
@@ -19,5 +21,12 @@ export class AppController {
   @Get('mitigation_questions')
   getMitigationQuestions(): any {
     return this.mitigationQuestionsService.getQuestions();
+  }
+
+  @Post('mitigation_answers')
+  checkMitigationAnswers(@Body() submittedAnswers: SubmittedAnswers): any {
+    const score =
+      this.mitigationQuestionsService.checkAnswers(submittedAnswers);
+    return { score };
   }
 }
