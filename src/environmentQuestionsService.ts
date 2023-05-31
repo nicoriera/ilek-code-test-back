@@ -3,6 +3,8 @@ import * as environmentQuestions from './data/questions_environment.json';
 import * as mitigationQuestions from './data/questions_mitigation.json';
 import { shuffle } from 'lodash';
 
+type SubmittedAnswers = Record<string, string>;
+
 @Injectable()
 export class EnvironmentQuestionsService {
   questions = environmentQuestions;
@@ -20,6 +22,24 @@ export class EnvironmentQuestionsService {
     });
   }
 
+  checkAnswers(submittedAnswers: SubmittedAnswers): number {
+    let score = 0;
+
+    this.questions.forEach((question) => {
+      const submittedAnswer = submittedAnswers[question.id];
+      const correctAnswer = question.answers.find((answer) => answer.isCorrect);
+
+      if (correctAnswer && submittedAnswer === correctAnswer.answer) {
+        console.log(
+          `Correct answer for question ${question.id}:`,
+          correctAnswer,
+        );
+        score++;
+      }
+    });
+    return score;
+  }
+
   getQuestions(): any {
     return this.#getFiveQuestions();
   }
@@ -28,4 +48,22 @@ export class EnvironmentQuestionsService {
 @Injectable()
 export class MitigationQuestionsService extends EnvironmentQuestionsService {
   questions = mitigationQuestions;
+
+  checkAnswers(submittedAnswers: SubmittedAnswers): number {
+    let score = 0;
+
+    this.questions.forEach((question) => {
+      const submittedAnswer = submittedAnswers[question.id];
+      const correctAnswer = question.answers.find((answer) => answer.isCorrect);
+
+      if (correctAnswer && submittedAnswer === correctAnswer.answer) {
+        console.log(
+          `Correct answer for question ${question.id}:`,
+          correctAnswer,
+        );
+        score++;
+      }
+    });
+    return score;
+  }
 }
