@@ -2,23 +2,9 @@ import { Controller, Get, Post, Body } from '@nestjs/common';
 import {
   EnvironmentQuestionsService,
   MitigationQuestionsService,
+  SubmittedAnswers,
+  Question,
 } from './environmentQuestionsService';
-
-type Question = {
-  id: number;
-  question: string;
-  answers: Answer[];
-};
-
-type Answer = {
-  id: number;
-  answer: string;
-  isCorrect: boolean;
-};
-
-type SubmittedAnswers = {
-  [key: string]: string;
-};
 
 @Controller()
 export class AppController {
