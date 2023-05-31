@@ -40,13 +40,14 @@ export class EnvironmentQuestionsService {
     let score = 0;
 
     this.questions.forEach((question) => {
-      const questionId = `question-${question.id}`;
-      const submittedAnswer = submittedAnswers[questionId];
-      const correctAnswer = question.answers.find((answer) => {
-        return answer.answer === submittedAnswer && answer.isCorrect;
-      });
+      const questionId = question.id.toString();
+      const submittedAnswer =
+        submittedAnswers[`question-${questionId}`] || 'N/A';
+      const correctAnswer = question.answers.find((answer) => answer.isCorrect);
+      const correctAnswerId = correctAnswer && correctAnswer.id.toString();
+      const isCorrect = correctAnswerId === submittedAnswer;
 
-      if (correctAnswer) {
+      if (isCorrect) {
         score++;
       }
     });
@@ -67,16 +68,17 @@ export class MitigationQuestionsService extends EnvironmentQuestionsService {
     let score = 0;
 
     this.questions.forEach((question) => {
-      const questionId = `question-${question.id}`;
-      const submittedAnswer = submittedAnswers[questionId];
-      const correctAnswer = question.answers.find((answer) => {
-        return answer.answer === submittedAnswer && answer.isCorrect;
-      });
+      const questionId = question.id.toString();
+      const submittedAnswer = submittedAnswers[`question-${questionId}`];
+      const correctAnswer = question.answers.find((answer) => answer.isCorrect);
 
-      if (correctAnswer) {
+      if (correctAnswer && submittedAnswer === correctAnswer.answer) {
         score++;
       }
     });
+
     return score;
   }
 }
+
+export { SubmittedAnswers, Question, Answer };
