@@ -27,7 +27,6 @@ export class AppController {
   checkMitigationAnswers(@Body() submittedAnswers: SubmittedAnswers): {
     score: number;
   } {
-    console.log(submittedAnswers);
     const score =
       this.mitigationQuestionsService.checkAnswers(submittedAnswers);
     return { score };
@@ -37,7 +36,6 @@ export class AppController {
   checkEnvironmentAnswers(@Body() submittedAnswers: SubmittedAnswers): {
     score: number;
   } {
-    console.log(submittedAnswers);
     const score =
       this.environmentQuestionsService.checkAnswers(submittedAnswers);
     return { score };
