@@ -69,10 +69,13 @@ export class MitigationQuestionsService extends EnvironmentQuestionsService {
 
     this.questions.forEach((question) => {
       const questionId = question.id.toString();
-      const submittedAnswer = submittedAnswers[`question-${questionId}`];
+      const submittedAnswer =
+        submittedAnswers[`question-${questionId}`] || 'N/A';
       const correctAnswer = question.answers.find((answer) => answer.isCorrect);
+      const correctAnswerId = correctAnswer && correctAnswer.id.toString();
+      const isCorrect = correctAnswerId === submittedAnswer;
 
-      if (correctAnswer && submittedAnswer === correctAnswer.answer) {
+      if (isCorrect) {
         score++;
       }
     });

@@ -28,32 +28,32 @@ describe('AppController', () => {
   describe('checkMitigationAnswers', () => {
     it('should return the correct score for the submitted answers', () => {
       const submittedAnswers = {
-        'question-1': 'answer-1',
-        'question-2': 'answer-2',
-        'question-3': 'answer-3',
-        'question-4': 'answer-4',
-        'question-5': 'answer-5',
+        'question-1': '1',
+        'question-2': '1',
+        'question-3': '1',
+        'question-4': '1',
+        'question-5': '1',
       };
 
-      const score = appController.checkMitigationAnswers(submittedAnswers);
+      const result = appController.checkMitigationAnswers(submittedAnswers);
 
-      expect(score).toBe(5);
+      expect(result.score).toBe(5);
     });
   });
 
   describe('checkEnvironmentAnswers', () => {
     it('should return the correct score for the submitted answers', () => {
       const submittedAnswers = {
-        'question-1': 'answer-1',
-        'question-2': 'answer-2',
-        'question-3': 'answer-3',
-        'question-4': 'answer-4',
-        'question-5': 'answer-5',
+        'question-1': '1',
+        'question-2': '1',
+        'question-3': '3',
+        'question-4': '1',
+        'question-5': '3',
       };
 
-      const score = appController.checkEnvironmentAnswers(submittedAnswers);
+      const result = appController.checkEnvironmentAnswers(submittedAnswers);
 
-      expect(score).toBe(5);
+      expect(result.score).toBe(5);
     });
   });
 
